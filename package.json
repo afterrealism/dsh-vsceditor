@@ -1,0 +1,56 @@
+{
+  "name": "dsh-vsceditor",
+  "version": "0.5.3",
+  "description": "VS Code panel for DeepSeek Harness sessions — embedded code-server or your local desktop VS Code — with ACP-style edit sync, red/green diff follow mode and file locking via the bundled dsh-bridge VS Code extension.",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "dsh-plugin",
+    "code-server",
+    "vscode",
+    "editor"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-ying/dsh-vsceditor.git"
+  },
+  "homepage": "https://github.com/k-ying/dsh-vsceditor#readme",
+  "bugs": "https://github.com/k-ying/dsh-vsceditor/issues",
+  "main": "lib/host.js",
+  "exports": {
+    ".": "./lib/host.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "vscode-ext/dsh-bridge",
+    "scripts",
+    "assets",
+    "cordis.patch.yml"
+  ],
+  "scripts": {
+    "install:editor": "sh scripts/install-code-server.sh",
+    "test": "node test/control-trust-smoke.mjs"
+  },
+  "engines": {
+    "node": ">=18",
+    "dsh": ">=0.2.0-rc.1 <0.3.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-runtime": ">=0.2.2-rc.1 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  }
+}
